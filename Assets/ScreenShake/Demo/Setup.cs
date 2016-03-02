@@ -20,10 +20,10 @@ using UnityEngine;
 
 public class Setup : MonoBehaviour
 {
-  public UnityEngine.UI.Button _button;
-  public Rustic.ScreenShake _screenShake;
+  public UnityEngine.UI.Button button;
+  public Rustic.ScreenShake screenShake;
 
   void Start () {
-    _button.onClick.AddListener(() => { Instantiate(_screenShake); });
+    button.onClick.AddListener(() => { Instantiate(screenShake); });
   }
 }
