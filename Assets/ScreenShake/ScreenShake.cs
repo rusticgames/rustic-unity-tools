@@ -26,12 +26,12 @@ namespace Rustic {
     public float duration;
     public float frequency;
 
-    private Camera camera;
-    private Vector3 cameraInitPos;
+    private Camera shakeCam;
+    private Vector3 shakeCamInitPos;
 
     void Start() {
-      camera = Camera.main;
-      cameraInitPos = camera.transform.position;
+      shakeCam = Camera.main;
+      shakeCamInitPos = shakeCam.transform.position;
       StartCoroutine(Shake());
     }
 
@@ -43,13 +43,13 @@ namespace Rustic {
 
 	var xPos = Random.Range(1, xAmount);
 	var yPos = Random.Range(1, yAmount);
-	var zPos = camera.transform.position.z;
-	camera.transform.position = new Vector3(xPos, yPos, zPos);
+	var zPos = shakeCam.transform.position.z;
+	shakeCam.transform.position = new Vector3(xPos, yPos, zPos);
 
 	yield return new WaitForSeconds(frequency);
       }
 
-      camera.transform.position = cameraInitPos;
+      shakeCam.transform.position = shakeCamInitPos;
 
       Destroy(gameObject);
     }
