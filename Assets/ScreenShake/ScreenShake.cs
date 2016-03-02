@@ -38,7 +38,7 @@ namespace Rustic {
     IEnumerator Shake() {
       var time = 0f;
 
-      while(time < duration) {
+      while(time <= duration) {
 	time += Time.deltaTime + frequency;
 
 	var xPos = Random.Range(-xAmount, xAmount);
