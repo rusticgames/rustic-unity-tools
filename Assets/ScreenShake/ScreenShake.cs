@@ -1,44 +1,57 @@
-﻿using UnityEngine;
+﻿/*
+ * Copyright © 2015 Rustic 
+ * This file is part of the Rustic Unity Toolset.
+ *
+ * The Rustic Unity Toolset is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * The Rustic Unity Toolset is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with The Rustic Unity Toolset.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+using UnityEngine;
 using System.Collections;
 
-namespace Rustic
-{
-    public class ScreenShake : MonoBehaviour
-    {
-	public float _xAmount;
-	public float _yAmount;
-	public float _duration;
-	public float _frequency;
+namespace Rustic {
+  public class ScreenShake : MonoBehaviour {
+    public float xAmount;
+    public float yAmount;
+    public float duration;
+    public float frequency;
 
-	private Camera camera;
-	private Vector3 cameraInitPos;
+    private Camera camera;
+    private Vector3 cameraInitPos;
 
-	void Start()
-	{
-	    camera = Camera.main;
-	    cameraInitPos = camera.transform.position;
-	    StartCoroutine(Shake());
-	}
-
-	IEnumerator Shake()
-	{
-	    var time = 0f;
-
-	    while(time < _duration) {
-		time += Time.deltaTime + _frequency;
-
-		var xPos = Random.Range(1, _xAmount);
-		var yPos = Random.Range(1, _yAmount);
-		var zPos = camera.transform.position.z;
-
-		camera.transform.position = new Vector3(xPos, yPos, zPos);
-
-		yield return new WaitForSeconds(_frequency);
-	    }
-
-	    camera.transform.position = cameraInitPos;
-
-	    Destroy(gameObject);
-	}
+    void Start() {
+      camera = Camera.main;
+      cameraInitPos = camera.transform.position;
+      StartCoroutine(Shake());
     }
+
+    IEnumerator Shake() {
+      var time = 0f;
+
+      while(time < duration) {
+	time += Time.deltaTime + frequency;
+
+	var xPos = Random.Range(1, xAmount);
+	var yPos = Random.Range(1, yAmount);
+	var zPos = camera.transform.position.z;
+	camera.transform.position = new Vector3(xPos, yPos, zPos);
+
+	yield return new WaitForSeconds(frequency);
+      }
+
+      camera.transform.position = cameraInitPos;
+
+      Destroy(gameObject);
+    }
+  }
 }
