@@ -41,8 +41,8 @@ namespace Rustic {
       while(time < duration) {
 	time += Time.deltaTime + frequency;
 
-	var xPos = Random.Range(1, xAmount);
-	var yPos = Random.Range(1, yAmount);
+	var xPos = Random.Range(-xAmount, xAmount);
+	var yPos = Random.Range(-yAmount, yAmount);
 	var zPos = shakeCam.transform.position.z;
 	shakeCam.transform.position = new Vector3(xPos, yPos, zPos);
 
