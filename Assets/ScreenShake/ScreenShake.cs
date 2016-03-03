@@ -20,38 +20,27 @@ using UnityEngine;
 using System.Collections;
 
 namespace Rustic {
-  public class ScreenShake : MonoBehaviour {
-    public float xAmount;
-    public float yAmount;
-    public float duration;
-    public float frequency;
-
-    private Camera shakeCam;
-    private Vector3 shakeCamInitPos;
-
-    void Start() {
-      shakeCam = Camera.main;
-      shakeCamInitPos = shakeCam.transform.position;
-      StartCoroutine(Shake());
-    }
-
-    IEnumerator Shake() {
+  public static class ScreenShake {
+    public static IEnumerator Shake(Camera cam,
+				    float x,
+				    float y,
+				    float duration,
+				    float frequency) {
       var time = 0f;
+      var initialCamPos = cam.transform.position;
 
       while(time <= duration) {
 	time += Time.deltaTime + frequency;
 
-	var xPos = Random.Range(-xAmount, xAmount);
-	var yPos = Random.Range(-yAmount, yAmount);
-	var zPos = shakeCam.transform.position.z;
-	shakeCam.transform.position = new Vector3(xPos, yPos, zPos);
+	var xPos = Random.Range(-x, x);
+	var yPos = Random.Range(-y, y);
+	var zPos = cam.transform.position.z;
+	cam.transform.position = new Vector3(xPos, yPos, zPos);
 
 	yield return new WaitForSeconds(frequency);
       }
 
-      shakeCam.transform.position = shakeCamInitPos;
-
-      Destroy(gameObject);
+      cam.transform.position = initialCamPos;
     }
   }
 }
