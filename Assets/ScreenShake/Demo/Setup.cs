@@ -21,9 +21,15 @@ using UnityEngine;
 public class Setup : MonoBehaviour
 {
   public UnityEngine.UI.Button button;
-  public Rustic.ScreenShake screenShake;
 
   void Start () {
-    button.onClick.AddListener(() => { Instantiate(screenShake); });
+    button.onClick.AddListener(() => {
+	var cam = Camera.main;
+	var x = Random.Range(0.1f, 0.8f);
+	var y = Random.Range(0.1f, 0.8f);
+	var duration = Random.Range(0.8f, 1.2f);
+	var frequency = Random.Range(0.05f, 0.15f);
+	StartCoroutine(Rustic.ScreenShake.Shake(cam, x, y, duration, frequency));
+      });
   }
 }
